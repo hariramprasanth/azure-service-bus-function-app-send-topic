@@ -15,13 +15,12 @@ app.http("sendtopic", {
 		const sender = sbClient.createSender(topicName);
 
 		try {
-			// Get the body of the POST request
-			const messageContent = request.body || request.text();
-			context.log("---- POST Body -----");
-            context.log(messageContent);
+            context.log("--------- POST BODY ----------")
+            const body = await request.json()
+            context.log(body)
             
 			// Create a message object with the body as a JSON string
-            const message = { body: JSON.stringify({ name: "hari", city : "cbe"}) }; // Hard coded messgae
+            const message = { body: JSON.stringify(body) }; // Hard coded messgae
 
 			// Send the message directly to the topic
 			await sender.sendMessages(message);
